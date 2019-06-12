@@ -1,0 +1,6 @@
+word2vec.py: 词向量、字向量生成
+feature.py: 生成SVD特征
+GCAE_word_char.py: 模型代码
+train.py: 训练入口
+utils.py: 一些公用的函数
+在根目录下运行以下命令即可：sh run.sh
