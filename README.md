@@ -48,7 +48,8 @@ aspect实体的情绪分析 (ATSA)
 
 # 4.	实验结果
 表 1 模型及其预测结果
-模型\参数	n_hidden	learning_rate	dropout_keep	F1 score
+模型\参数	
+n_hidden	learning_rate	dropout_keep	F1 score
 - GCAE	400	0.0005	0.5	71%
 - fastText	-	-	-	49%
 - XGboost	-	-	-	45%
