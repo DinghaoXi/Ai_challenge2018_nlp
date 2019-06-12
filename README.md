@@ -19,12 +19,13 @@ ABSA有两个子任务:
 该任务属于基于aspect词的情感分析(aspect-term sentiment analysis, ATSA)。
 # 3.	实验方法设计
 由于最后预测的结果包含二十个维度，因此先训练20个LightGBM模型，根据特征重要性进行排序并选取TOP7作为各维度的关键词，例如交通是否便利(traffic convenience)维度的“地铁站 地铁 地理位置 位置 公交车 公交车站 公交站”，距离商圈远近(distance from business district)维度的“百货 商圈 商场 广场 购物中心 城 商业街”。
- 
-图 1 维度
+ ![维度](./pics/维度.png)
+
 ## 3.1 文字编码部分
 由《R-Net: Machine Reading Comprehension with Self-Matching Networks》[1]中，同时使用了char-embedding和word-embedding，不同的是char-embedding是通过将char放入双向GRU之后，最终的是通过GRU的最终状态来得到。利用两个双向RNN网络分别对question和passage再编码。而之前多数都是用的CNN卷积和highway。
- 
-图 2  R-net
+
+![rnet](./pics/rnet.jpg) 
+
 于是在本次实验之中我们也借鉴这种word和char结合的方式，变相地增加了输入的数据量。并且使用w2v对word进行编码，对char使用BiRNN进行编码。
 举个例子：奶茶十分好喝。词向量表示：[W2V(奶茶),W2V(十分), W2V(好喝)]
 经过BiRNN的字向量：[BiRNN(奶,茶),BiRNN(十,分), BiRNN (好,喝)]
@@ -39,11 +40,12 @@ aspect实体的情绪分析 (ATSA)
 例如, 在句子 "Average to good Thai food, but terrible delivery ."中， ATSA 会分析实体Thai food的情感极性；ACSA 会分析aspect “service”情感极性, 即使“service”没有出现在句子中。
 在aspect极性抽取任务之中，多数实验使用LSTM和attention机制来预测有关目标的情感极性，但模型往往很复杂并且需要很长的训练时间。本文提出了一个基于CNN和Gating Mechanisms（门机制）的模型。一种新的Tanh-ReLU 门单元能够根据给定的aspect或实体选择输出的情感特征。这个结构比应用于现有模型的attention层简单得多。同时，本文中模型的计算在训练中很容易并行化，因为卷积层不像LSTM层那样有时间依赖性，并且门单元也能够独立工作。此文在SemEval 数据集上进行试验，表明了实验效果的提升。
 本文模型在更短的训练时间下能得到更好的精确度。对于ACSA任务，模型在embedding层之上有两个单独的卷积层，这个embedding层的输出是由新型门单元的组合组成的。多个滤波器的卷积层可以有效地提取每个接受域上多个粒度的n-gram特征。门单元有两个非线性门，两个中的每一个都和一个卷积层链接。在给定的aspect信息下，对于情感的预测能够抽取aspect-specific情感信息。比如说，在句子“Average to good Thai food, but terrible delivery”中当food这个aspect被提供，门单元能够自动忽视在第二个子句中delivery这个aspect的消极情绪，并且只输出第一个子句的积极情绪。因为模型中的每个组成部分都能够并行，因此比LSTM和attention机制需要更少的训练时间。对于ATSA任务，其中aspect由多个单词组成，本文扩展了模型以包含目标表达式的另一个卷积层。原文模型如下图：
- 
-图 3  GCAE
+
+![gcae](./pics/gcae.png) 
+
 在这个模型的基础上，在最后的线性层之前加上了CNN增加分类能力，最后在使用softmax分类。我们最终模型如下图：
- 
-图 4  GCAE_expanded
+![gcae_expanded](./pics/gcae_expanded.png)
+
 # 4.	实验结果
 表 1 模型及其预测结果
 模型\参数	n_hidden	learning_rate	dropout_keep	F1 score
