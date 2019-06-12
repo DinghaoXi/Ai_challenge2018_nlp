@@ -1,6 +1,12 @@
 # Ai_challenge2018_nlp
-# F1 = 0.71+
-Ai_challenge2018_nlp细粒度情感分析——代码复现
+
+## Ai_challenge2018_nlp细粒度情感分析——代码复现，得分 F1 = 0.71 多一些，
+
+数据连接：
+
+链接：https://pan.baidu.com/s/1M3XARSd-8lpBoBQNgT3qEQ 
+提取码：5id5 
+
 # 1.	实验环境说明
 Python版本：3.6.8
 Cuda版本：9.0.176
