@@ -1,4 +1,5 @@
-# Ai_challenge2018_nlp-
+# Ai_challenge2018_nlp
+# F1 = 0.71+
 Ai_challenge2018_nlp细粒度情感分析——代码复现
 # 1.	实验环境说明
 Python版本：3.6.8
