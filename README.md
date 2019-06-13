@@ -81,3 +81,6 @@ Boost系列与BP和Naive Bayesian相比，最后得到的结果更好。猜测�
 - [2]	Xue, W., & Li, T. (2018). Aspect based sentiment analysis with gated convolutional networks. arXiv preprint arXiv:1805.07043.
 - [3]	Liu, T. Y. (2009, August). Easyensemble and feature selection for imbalance data sets. In 2009 International Joint Conference on Bioinformatics, Systems Biology and Intelligent Computing (pp. 517-520). IEEE.
 - [4]	Chawla, N. V., Bowyer, K. W., Hall, L. O., & Kegelmeyer, W. P. (2002). SMOTE: synthetic minority over-sampling technique. Journal of artificial intelligence research, 16, 321-357.
+
+感谢作者：
+https://github.com/BigHeartC/Al_challenger_2018_sentiment_analysis
