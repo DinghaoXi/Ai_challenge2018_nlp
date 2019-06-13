@@ -16,13 +16,19 @@ Cudnn版本：7.5.0
 # 2.	实验任务分析
 该任务属于文本情感分析任务中的方面级情感分析(Aspect Based Sentiment Analysis, ABSA)下，与篇章级情感分析和句子级情感分析相比，它的粒度最细，其目的是分析出文本中涉及到的每一个方面上的情感倾向性（共20个方面）。
 ABSA有两个子任务:
--（1）基于aspect类的情感分析(aspect-category sentiment analysis, ACSA)，主要任务是判断关于句子中的某个实体(entity)的情感极性。比如：
+
+（1）基于aspect类的情感分析(aspect-category sentiment analysis, ACSA)，主要任务是判断关于句子中的某个实体(entity)的情感极性。比如：
 输入：文本是“这块手表的颜色不错”，entity是“颜色”
 输出：情感极性
--（2）基于aspect词的情感分析(aspect-term sentiment analysis, ATSA)，主要任务是判断判断句子在某方面的情感极性，类似于一个多标签(multi-label)的任务。
+
+（2）基于aspect词的情感分析(aspect-term sentiment analysis, ATSA)，主要任务是判断判断句子在某方面的情感极性，类似于一个多标签(multi-label)的任务。
+
 输入：文本是“这家餐厅的环境还不错，可以菜做的不怎么样”
+
 输出：环境方面的情感极性，交通便利方面的情感极性，做菜方面的情感极性。
+
 该任务属于基于aspect词的情感分析(aspect-term sentiment analysis, ATSA)。
+
 # 3.	实验方法设计
 由于最后预测的结果包含二十个维度，因此先训练20个LightGBM模型，根据特征重要性进行排序并选取TOP7作为各维度的关键词，例如交通是否便利(traffic convenience)维度的“地铁站 地铁 地理位置 位置 公交车 公交车站 公交站”，距离商圈远近(distance from business district)维度的“百货 商圈 商场 广场 购物中心 城 商业街”。
  ![维度](./pics/维度.png)
